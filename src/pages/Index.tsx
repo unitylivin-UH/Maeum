@@ -97,9 +97,6 @@ const Index = () => {
           </div>
           <div className="w-full flex flex-col items-center px-6">
             <img src={logoCream} alt="Maeum" className="w-40 md:w-80 lg:w-[26rem] h-auto" />
-            <p className="font-acumin text-[hsl(40,70%,90%)] text-[10px] md:text-xs tracking-[0.3em] mt-1 md:mt-4">
-              BEAUTY, WITH FEELING.
-            </p>
           </div>
         </div>
       </section>
