@@ -118,8 +118,8 @@ const WaitlistPopup = ({ isOpen, onClose }: WaitlistPopupProps) => {
                 Congratulations!
               </h3>
               <p className="font-geist font-extralight text-[16px] md:text-[18px] leading-6 mb-6 text-black/85">
-                You have successfully joined the Maeum waitlist. We will send your launch updates,
-                early access details, and exclusive member surprises soon.
+                You have successfully joined the Maeum waitlist. We’ll send you personalised launch
+                updates, early-access details, and exclusive member surprises soon.
               </p>
               <button
                 type="button"
