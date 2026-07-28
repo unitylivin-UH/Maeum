@@ -48,7 +48,7 @@ const Home = () => {
       <video
         ref={mobileVideoRef}
         className="absolute inset-0 h-full w-full object-cover md:hidden"
-        src="/mobile2.mp4"
+        src="/mobilee3.mp4"
         autoPlay
         muted
         loop

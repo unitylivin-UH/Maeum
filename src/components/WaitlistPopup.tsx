@@ -1,6 +1,4 @@
 import { FormEvent, useState } from "react";
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/style.css";
 import { Link } from "react-router-dom";
 import { MAEUM_WAITLIST_API_ORIGIN } from "@/lib/site";
 
@@ -171,48 +169,23 @@ const WaitlistPopup = ({ isOpen, onClose }: WaitlistPopupProps) => {
                     className="w-full rounded-[12px] border-0 bg-white px-4 py-3 font-geist text-[16px] text-black placeholder:text-black/50 outline-none focus:outline-none focus:ring-0"
                   />
                 </div>
-                <PhoneInput
-                  country="gb"
-                  value={phone}
-                  onChange={(value) => setPhone(value)}
-                  enableSearch
-                  containerStyle={{
-                    width: "100%",
-                    borderRadius: "12px",
-                    boxShadow:
-                      focusedField === "phone"
-                        ? "0 0 0 2px rgba(200, 27, 23, 0.5)"
-                        : "0 0 0 1px transparent",
-                    transition: "box-shadow 150ms ease",
-                  }}
-                  buttonStyle={{
-                    border: "0",
-                    background: "#ffffff",
-                    borderRadius: "12px 0 0 12px",
-                  }}
-                  dropdownStyle={{
-                    borderRadius: "12px",
-                    maxHeight: "220px",
-                  }}
-                  inputStyle={{
-                    width: "100%",
-                    height: "48px",
-                    border: "0",
-                    borderRadius: "12px",
-                    paddingLeft: "56px",
-                    fontFamily: "Geist, sans-serif",
-                    fontSize: "16px",
-                    color: "#000000",
-                    boxShadow: "none",
-                  }}
-                  inputProps={{
-                    name: "phone",
-                    required: true,
-                    placeholder: "Phone number",
-                    onFocus: () => setFocusedField("phone"),
-                    onBlur: () => setFocusedField(null),
-                  }}
-                />
+                <div
+                  className={`rounded-[12px] bg-white transition-shadow ${
+                    focusedField === "phone" ? "ring-2 ring-[#c81b17]/50" : "ring-1 ring-transparent"
+                  }`}
+                >
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={phone}
+                    onChange={(event) => setPhone(event.target.value)}
+                    onFocus={() => setFocusedField("phone")}
+                    onBlur={() => setFocusedField(null)}
+                    placeholder="+44 XXXX XXXXXX"
+                    required
+                    className="w-full rounded-[12px] border-0 bg-white px-4 py-3 font-geist text-[16px] text-black placeholder:text-black/50 outline-none focus:outline-none focus:ring-0"
+                  />
+                </div>
 
                 <label className="flex items-start gap-2.5 text-left">
                   <input
