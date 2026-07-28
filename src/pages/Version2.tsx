@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import logoRed from "@/assets/logo-red-color.png";
 import VersionToggle from "@/components/VersionToggle";
-import WaitlistPopup from "@/components/WaitlistPopup";
 
-const Home = () => {
-  const [isWaitlistPopupOpen, setIsWaitlistPopupOpen] = useState(false);
+const Version2 = () => {
   const mobileVideoRef = useRef<HTMLVideoElement>(null);
   const tabletVideoRef = useRef<HTMLVideoElement>(null);
   const desktopVideoRef = useRef<HTMLVideoElement>(null);
@@ -96,23 +95,17 @@ const Home = () => {
           <p className="font-myungjo uppercase text-white text-[32px] leading-none tracking-[0.06em] md:text-[56px] lg:text-[58px]">
             Coming soon!
           </p>
-          <button
-            type="button"
-            onClick={() => setIsWaitlistPopupOpen(true)}
+          <Link
+            to="/explainer"
             className="font-myungjo uppercase tracking-[0.12em] text-white text-[14px] md:text-[20px] lg:text-[22px] leading-none bg-transparent border-0 p-0 pb-1 border-b border-white transition-opacity duration-300 hover:opacity-70"
-            aria-label="Open waitlist form"
+            aria-label="Go to explainer page"
           >
             Join the waitlist
-          </button>
+          </Link>
         </div>
       </div>
-
-      <WaitlistPopup
-        isOpen={isWaitlistPopupOpen}
-        onClose={() => setIsWaitlistPopupOpen(false)}
-      />
     </div>
   );
 };
 
-export default Home;
+export default Version2;

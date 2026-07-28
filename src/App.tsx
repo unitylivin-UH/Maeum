@@ -12,6 +12,7 @@ import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
 import TermsOfUse from "./pages/TermsOfUse.tsx";
+import Version2 from "./pages/Version2.tsx";
 
 const queryClient = new QueryClient();
 
@@ -67,6 +68,7 @@ const App = () => {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/version-2" element={<Version2 />} />
               <Route path="/explainer" element={<Index />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-of-use" element={<TermsOfUse />} />
