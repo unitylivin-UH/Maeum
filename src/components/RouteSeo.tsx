@@ -10,10 +10,6 @@ const ROUTES: Record<string, { title: string; description: string }> = {
     title: "Maeum Skincare",
     description: "Maeum skincare and lipcare landing page.",
   },
-  "/version-2": {
-    title: "Maeum Skincare | Version 2",
-    description: "Maeum skincare and lipcare landing page version 2.",
-  },
   "/explainer": {
     title: "Maeum Skincare | Explainer",
     description: "Maeum skincare and lipcare explainer page.",

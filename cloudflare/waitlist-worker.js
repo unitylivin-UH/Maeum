@@ -10,6 +10,8 @@ const DEFAULT_ORIGINS = [
   "https://maeum.co.uk",
   "https://www.maeum.co.uk",
   "https://steelblue-raccoon-148493.hostingersite.com",
+  "http://localhost:5173",
+  "http://127.0.0.1:5173",
 ];
 
 function getAllowedOrigins(env) {
@@ -63,6 +65,10 @@ function mapBrevoErrorMessage(status, brevoText) {
 
   if (status === 401 && /unrecognised IP address/i.test(brevoMessage)) {
     return "Brevo blocked this server IP. Add your current public IP to Brevo Authorized IPs.";
+  }
+
+  if (status === 400 && /sms|phone|mobile|invalid.*number|number.*invalid/i.test(brevoMessage + brevoText)) {
+    return "That phone number doesn’t look valid. Please check it and try again.";
   }
 
   const statusMessageByCode = {

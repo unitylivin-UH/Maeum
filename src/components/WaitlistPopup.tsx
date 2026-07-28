@@ -17,33 +17,22 @@ const WaitlistPopup = ({ isOpen, onClose }: WaitlistPopupProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const [feedback, setFeedback] = useState<string | null>(null);
-  const [phoneError, setPhoneError] = useState<string | null>(null);
   const [focusedField, setFocusedField] = useState<"name" | "email" | "phone" | null>(null);
+
+  // Local Vite uses the `/api` proxy → server.mjs. Production uses env or the Worker origin.
   const apiBaseFromEnv = (import.meta.env.VITE_API_BASE_URL as string | undefined)?.trim();
-  const apiBaseUrl =
-    apiBaseFromEnv ||
-    (import.meta.env.DEV ? "" : MAEUM_WAITLIST_API_ORIGIN);
+  const apiBaseUrl = import.meta.env.DEV
+    ? ""
+    : apiBaseFromEnv || MAEUM_WAITLIST_API_ORIGIN;
   const waitlistEndpoint = apiBaseUrl
     ? `${apiBaseUrl.replace(/\/+$/, "")}/api/waitlist`
     : "/api/waitlist";
-
-  const isPhoneValid = (value: string) => {
-    const digits = value.replace(/\D/g, "");
-    return digits.length >= 10 && digits.length <= 15;
-  };
 
   if (!isOpen) return null;
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setFeedback(null);
-    setPhoneError(null);
-
-    if (!isPhoneValid(phone)) {
-      setPhoneError("Please enter a valid phone number including country code.");
-      return;
-    }
-
     setIsSubmitting(true);
 
     try {
@@ -185,11 +174,8 @@ const WaitlistPopup = ({ isOpen, onClose }: WaitlistPopupProps) => {
                 <PhoneInput
                   country="gb"
                   value={phone}
-                  onChange={(value) => {
-                    setPhone(value);
-                    if (phoneError) setPhoneError(null);
-                  }}
-                  disableDropdown
+                  onChange={(value) => setPhone(value)}
+                  enableSearch
                   containerStyle={{
                     width: "100%",
                     borderRadius: "12px",
@@ -203,7 +189,10 @@ const WaitlistPopup = ({ isOpen, onClose }: WaitlistPopupProps) => {
                     border: "0",
                     background: "#ffffff",
                     borderRadius: "12px 0 0 12px",
-                    cursor: "default",
+                  }}
+                  dropdownStyle={{
+                    borderRadius: "12px",
+                    maxHeight: "220px",
                   }}
                   inputStyle={{
                     width: "100%",
@@ -224,11 +213,6 @@ const WaitlistPopup = ({ isOpen, onClose }: WaitlistPopupProps) => {
                     onBlur: () => setFocusedField(null),
                   }}
                 />
-                {phoneError ? (
-                  <p className="text-sm font-geist text-[#7a3a33]" role="alert">
-                    {phoneError}
-                  </p>
-                ) : null}
 
                 <label className="flex items-start gap-2.5 text-left">
                   <input
@@ -253,7 +237,7 @@ const WaitlistPopup = ({ isOpen, onClose }: WaitlistPopupProps) => {
 
                 <button
                   type="submit"
-                  disabled={!hasConsent || isSubmitting || !isPhoneValid(phone)}
+                  disabled={!hasConsent || isSubmitting}
                   className="w-full rounded-[12px] bg-[#c81b17] px-4 py-3 text-[#f6ead0] font-myungjo text-[16px] uppercase tracking-[0.03em] shadow-[0_10px_24px_rgba(0,0,0,0.2)] disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? "Submitting..." : "Submit"}

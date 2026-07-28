@@ -26,6 +26,23 @@ const normalizePhoneForBrevo = (rawPhone) => {
   return `+${cleaned}`;
 };
 
+const mapBrevoErrorMessage = (status, brevoErrorMessage, brevoError) => {
+  if (status === 401 && /unrecognised IP address/i.test(brevoErrorMessage)) {
+    return "Brevo blocked this server IP. Add your current public IP to Brevo Authorized IPs.";
+  }
+  if (status === 400 && /sms|phone|mobile|invalid.*number|number.*invalid/i.test(brevoErrorMessage + brevoError)) {
+    return "That phone number doesn’t look valid. Please check it and try again.";
+  }
+  const statusMessageByCode = {
+    400: "Brevo rejected the payload. Check contact attributes and list setup.",
+    401: "Brevo authentication failed. Please verify BREVO_API_KEY or Brevo IP allowlist settings.",
+    403: "Brevo denied access for this API key.",
+    404: "Brevo resource not found. Verify BREVO_LIST_ID.",
+    429: "Brevo rate limit reached. Please retry shortly.",
+  };
+  return statusMessageByCode[status] || "Brevo rejected the contact submission.";
+};
+
 app.post("/api/waitlist", async (req, res) => {
   const apiKey = process.env.BREVO_API_KEY;
   const rawListId = process.env.BREVO_LIST_ID;
@@ -82,22 +99,10 @@ app.post("/api/waitlist", async (req, res) => {
       } catch {
         brevoErrorMessage = "";
       }
-      const statusMessageByCode = {
-        400: "Brevo rejected the payload. Check contact attributes and list setup.",
-        401: "Brevo authentication failed. Please verify BREVO_API_KEY or Brevo IP allowlist settings.",
-        403: "Brevo denied access for this API key.",
-        404: "Brevo resource not found. Verify BREVO_LIST_ID.",
-        429: "Brevo rate limit reached. Please retry shortly.",
-      };
-
-      const message =
-        response.status === 401 && /unrecognised IP address/i.test(brevoErrorMessage)
-          ? "Brevo blocked this server IP. Add your current public IP to Brevo Authorized IPs."
-          : statusMessageByCode[response.status] || "Brevo rejected the contact submission.";
 
       return res.status(response.status).json({
         ok: false,
-        message,
+        message: mapBrevoErrorMessage(response.status, brevoErrorMessage, brevoError),
         details: brevoError,
       });
     }
