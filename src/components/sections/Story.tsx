@@ -74,9 +74,9 @@ const Story = () => {
             ritual. So do we.
           </p>
           <p className="story-fade">
-            Maeum is a devotion, born in Korea. Rooted in real science. Carried by the quiet spirit
-            of jeongseong (정성), the patience of doing something properly, again and again, until
-            it becomes love.
+            An honest creation, rooted in Korean innovation and grounded in science. Guided by
+            jeongseong (정성), the art of sincere, unhurried care, it is formulated to transform
+            your lips over time, building a lasting foundation of health and softness.
           </p>
           <p className="story-fade">
             Every touch, slow on purpose. Skincare that stays long after the mask comes off.{" "}
