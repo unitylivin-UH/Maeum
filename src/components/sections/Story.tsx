@@ -70,14 +70,18 @@ const Story = () => {
           />
 
           <p className="story-fade">
-            The beauty you actually want, the kind that lasts, comes from care night after night.
-            We were tired of quick fixes: lip products that fade by morning and ask you to buy
-            them again.
+            Some things deserve time. Your lips already know the difference between a fix and a
+            ritual. So do we.
           </p>
           <p className="story-fade">
-            So we made something honest. Made in Korea, built on real science, with the soul of
-            정성 (jeongseong) — care, given slowly and with intention. Designed to make your lips
-            softer, fuller, and properly cared for. Not in a week, but for the long run.
+            Maeum is a devotion, born in Korea. Rooted in real science. Carried by the quiet spirit
+            of jeongseong (정성), the patience of doing something properly, again and again, until
+            it becomes love.
+          </p>
+          <p className="story-fade">
+            Every touch, slow on purpose. Skincare that stays long after the mask comes off.{" "}
+            Real beauty isn&apos;t a moment. It&apos;s a ritual, a promise you keep to yourself,
+            night after night.
           </p>
           <p className="story-fade">
             <img
@@ -85,8 +89,8 @@ const Story = () => {
               alt="Maeum"
               className="inline-block align-middle w-24 md:w-40 h-auto mx-1"
             />
-            is for anyone who wants Korean
-            science with feeling behind it.
+            is for those who feel their skincare instead of just using it — Korean science with
+            feeling behind it.
           </p>
         </div>
 
